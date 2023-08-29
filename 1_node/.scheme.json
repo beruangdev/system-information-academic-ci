@@ -1,0 +1,940 @@
+[
+  {
+    "tableName": "academic_advisors",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "lecturer_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "student_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "academics",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "academicable_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "academicable_type",
+        "type": "varchar(255)"
+      },
+      {
+        "name": "user_id",
+        "type": "bigint(20) unsigned",
+        "comment": "merupakan foreign key yang mengacu pada tabel `users`, untuk menghubungkan data pegawai akademik dengan data user"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "classroom_enrollments",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "remarks",
+        "type": "text",
+        "comment": "Kolom ini digunakan untuk menyimpan catatan atau keterangan tambahan terkait status pendaftaran mahasiswa ke dalam kelas. Misalnya, alasan penolakan pendaftaran jika statusnya `rejected`, atau pesan persetujuan jika statusnya `approved`."
+      },
+      {
+        "name": "status",
+        "type": "enum('pending','approved','rejected')",
+        "comment": "menyimpan status registrasi, seperti `pending` (menunggu persetujuan), `approved` (disetujui), atau `rejected` (ditolak)."
+      },
+      {
+        "name": "season_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "classroom_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "student_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "classroom_lecturer",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "classroom_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "lecturer_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "classroom_sessions",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "start_datetime",
+        "type": "datetime",
+        "comment": "menyimpan tanggal dan jam dimulainya sesi kelas"
+      },
+      {
+        "name": "end_datetime",
+        "type": "datetime",
+        "comment": "menyimpan tanggal dan jam berakhirnya sesi kelas"
+      },
+      {
+        "name": "attendance_code",
+        "type": "varchar(255)",
+        "comment": "menyimpan kode unik atau token yang digunakan mahasiswa untuk mencatat kehadiran secara otomatis atau online. Kode ini dapat dihasilkan secara acak untuk setiap sesi kelas."
+      },
+      {
+        "name": "topic",
+        "type": "text",
+        "comment": "menyimpan topik atau materi yang akan dibahas dalam sesi tersebut."
+      },
+      {
+        "name": "classroom_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "season_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "lecturer_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "room_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "classroom_student",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "classroom_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "student_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "classrooms",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "name",
+        "type": "varchar(255)",
+        "comment": "misalnya \"Kelas A\", \"Kelas B\", dst."
+      },
+      {
+        "name": "capacity",
+        "type": "int(11)",
+        "comment": "Kapasitas maksimum mahasiswa dalam kelas."
+      },
+      {
+        "name": "credits",
+        "type": "int(11)",
+        "comment": "menyimpan nilai jumlah kredit atau sks (sistem kredit semester) dari mata kuliah"
+      },
+      {
+        "name": "season_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "course_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "course_prerequisites",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "course_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "prerequisite_course_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "course_requirements",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "course_id",
+        "type": "bigint(20) unsigned",
+        "comment": "Foreign key untuk menghubungkan dengan tabel courses"
+      },
+      {
+        "name": "faculty_id",
+        "type": "bigint(20) unsigned",
+        "comment": "Foreign key untuk menghubungkan dengan tabel faculties"
+      },
+      {
+        "name": "major_id",
+        "type": "bigint(20) unsigned",
+        "comment": "Foreign key untuk menghubungkan dengan tabel majors"
+      },
+      {
+        "name": "is_mandatory",
+        "type": "tinyint(1)",
+        "comment": "Menandakan apakah mata kuliah ini wajib atau pilihan"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "courses",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "code",
+        "type": "varchar(255)",
+        "comment": "menyimpan kode unik untuk mata kuliah"
+      },
+      {
+        "name": "name",
+        "type": "varchar(255)",
+        "comment": "menyimpan nama lengkap mata kuliah"
+      },
+      {
+        "name": "credits",
+        "type": "int(11)",
+        "comment": "menyimpan nilai default jumlah kredit atau sks (sistem kredit semester) dari mata kuliah"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "degrees",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "name",
+        "type": "varchar(255)",
+        "comment": "nama fakultas"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "faculties",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "name",
+        "type": "varchar(255)",
+        "comment": "nama fakultas"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "lecturers",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "position",
+        "type": "varchar(255)",
+        "comment": "menjelaskan dirinya dikampus, seperti asisten dosen, dosen atau dosen senior"
+      },
+      {
+        "name": "specialization",
+        "type": "varchar(255)",
+        "comment": "spesialisasi dari dosen ini"
+      },
+      {
+        "name": "phone_number",
+        "type": "varchar(255)",
+        "comment": "nomor telepon dosen"
+      },
+      {
+        "name": "status",
+        "type": "enum('active','inactive')",
+        "comment": "status keaktifan dosen dalam sistem"
+      },
+      {
+        "name": "user_id",
+        "type": "bigint(20) unsigned",
+        "comment": "merupakan foreign key yang mengacu pada tabel `users`"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "majors",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "name",
+        "type": "varchar(255)",
+        "comment": "nama jurusan"
+      },
+      {
+        "name": "faculty_id",
+        "type": "bigint(20) unsigned",
+        "comment": "menghubungkan jurusan dengan fakultas dimana 1 fakultas bisa terdapat 1 atau banyak jurusan"
+      },
+      {
+        "name": "degree_id",
+        "type": "bigint(20) unsigned",
+        "comment": "menghubungkan jurusan dengan level strata dimana 1 level strata bisa terdapat 1 atau banyak jurusan"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "rooms",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "name",
+        "type": "varchar(255)",
+        "comment": "nama ruang bisa, diawali dengan nama gedung - lantai - nomor ruangan"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "comment": "berisi info lebih rinci mengenai lokasi ruangan dan rincian lainya"
+      },
+      {
+        "name": "capacity",
+        "type": "int(11)",
+        "comment": "kapasitas maksimal mahasiswa dalam sebuah ruangan"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "seasons",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "name",
+        "type": "varchar(255)",
+        "comment": "misal: `2023/2024`, `2024/2025`, dst."
+      },
+      {
+        "name": "start_date",
+        "type": "date"
+      },
+      {
+        "name": "end_date",
+        "type": "date"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "student_attendances",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "status",
+        "type": "enum('present','absent')",
+        "comment": "status kehadiran"
+      },
+      {
+        "name": "student_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "classroom_session_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "student_grades",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "grade",
+        "type": "float",
+        "comment": "menyimpan informasi tentang nilai yang diberikan pada mata kuliah tersebut."
+      },
+      {
+        "name": "student_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "course_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "classroom_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "season_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "user_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "student_season_logs",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "status",
+        "type": "enum('active','inactive','graduate','dropout')",
+        "comment": "status mahasiswa dalam season tersebut, bisa berupa `active` untuk mahasiswa aktif, `inactive` untuk mahasiswa yang tidak aktif, `graduate` untuk mahasiswa yang telah lulus, dan `dropout` untuk mahasiswa yang telah drop out dari universitas"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "comment": "deskripsi atau catatan tambahan mengenai log kegiatan mahasiswa pada season tersebut"
+      },
+      {
+        "name": "student_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "season_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "students",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "current_credits",
+        "type": "int(11)",
+        "comment": "Untuk menghitung jumlah kredit atau sks yang telah diambil oleh setiap mahasiswa pada semester saat ini."
+      },
+      {
+        "name": "admission_year",
+        "type": "int(11)",
+        "comment": "menyimpan tahun masuk mahasiswa"
+      },
+      {
+        "name": "date_of_birth",
+        "type": "date",
+        "comment": "tanggal lahir mahasiswa"
+      },
+      {
+        "name": "gender",
+        "type": "enum('male','female','other')",
+        "comment": "jenis kelamin mahasiswa"
+      },
+      {
+        "name": "status",
+        "type": "enum('active','inactive','graduate','dropout')",
+        "comment": "status keaktifan mahasiswa dalam sistem"
+      },
+      {
+        "name": "address",
+        "type": "text",
+        "comment": "alamat mahasiswa"
+      },
+      {
+        "name": "phone_number",
+        "type": "varchar(255)",
+        "comment": "nomor telepon mahasiswa"
+      },
+      {
+        "name": "guardian_name",
+        "type": "varchar(255)",
+        "comment": "nama wali mahasiswa"
+      },
+      {
+        "name": "guardian_phone_number",
+        "type": "varchar(255)",
+        "comment": "nomor telepon wali mahasiswa"
+      },
+      {
+        "name": "blood_type",
+        "type": "varchar(3)",
+        "comment": "golongan darah mahasiswa"
+      },
+      {
+        "name": "tuition_fee",
+        "type": "bigint(20) unsigned",
+        "comment": "menyimpan besaran SPP untuk mahasiswa"
+      },
+      {
+        "name": "user_id",
+        "type": "bigint(20) unsigned",
+        "comment": "merupakan foreign key yang mengacu pada tabel `users`"
+      },
+      {
+        "name": "faculty_id",
+        "type": "bigint(20) unsigned",
+        "comment": "menyimpan foreign key untuk menghubungkan data mahasiswa dengan fakultas"
+      },
+      {
+        "name": "major_id",
+        "type": "bigint(20) unsigned",
+        "comment": "menyimpan foreign key untuk menghubungkan data mahasiswa dengan jurusan"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "tuition_payments",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "payment_at",
+        "type": "datetime",
+        "comment": "menyimpan tanggal pembayaran SPP."
+      },
+      {
+        "name": "amount",
+        "type": "bigint(20) unsigned",
+        "comment": "menyimpan jumlah pembayaran SPP."
+      },
+      {
+        "name": "receipt_number",
+        "type": "varchar(255)",
+        "comment": "menyimpan nomor kwitansi pembayaran."
+      },
+      {
+        "name": "status",
+        "type": "enum('pending','paid','expired','failed')",
+        "comment": "status pembayaran."
+      },
+      {
+        "name": "student_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "season_id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime",
+        "comment": "Waktu pembuatan record"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime",
+        "comment": "Waktu terakhir record diperbarui"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime",
+        "comment": "Waktu record dihapus (soft delete)"
+      }
+    ]
+  },
+  {
+    "tableName": "users",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint(20) unsigned"
+      },
+      {
+        "name": "username",
+        "type": "varchar(30)"
+      },
+      {
+        "name": "status",
+        "type": "varchar(255)"
+      },
+      {
+        "name": "status_message",
+        "type": "varchar(255)"
+      },
+      {
+        "name": "active",
+        "type": "tinyint(1)"
+      },
+      {
+        "name": "last_active",
+        "type": "datetime"
+      },
+      {
+        "name": "created_at",
+        "type": "datetime"
+      },
+      {
+        "name": "updated_at",
+        "type": "datetime"
+      },
+      {
+        "name": "deleted_at",
+        "type": "datetime"
+      }
+    ]
+  }
+]
